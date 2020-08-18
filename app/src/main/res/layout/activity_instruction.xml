@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.InstructionActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/video_player_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/instruction_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/video_player_container"
+            app:layout_constraintLeft_toLeftOf="parent" />
+        <ImageView
+            android:id="@+id/iv_back_button"
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/button_size"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_gravity="center"
+            android:src="@mipmap/back_button"
+            android:onClick="onBackButtonClicked"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+        <ImageView
+            android:id="@+id/iv_next_button"
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/button_size"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_gravity="center"
+            android:src="@mipmap/next_button"
+            android:onClick="onNextButtonClicked"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

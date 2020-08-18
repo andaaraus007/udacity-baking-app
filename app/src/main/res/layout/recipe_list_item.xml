@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto" >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_recipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            card_view:cardCornerRadius="@dimen/card_radius" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_recipe_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+                <TextView
+                    android:id="@+id/tv_recipe_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/default_text_size_header"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_recipe_image"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+                <TextView
+                    android:id="@+id/tv_steps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/default_text_size_body"
+                    app:layout_constraintTop_toBottomOf="@id/tv_recipe_name"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+                <TextView
+                    android:id="@+id/tv_ingredients"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/default_text_size_body"
+                    app:layout_constraintTop_toBottomOf="@id/tv_steps"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+                <TextView
+                    android:id="@+id/tv_serving_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/serving_size_value"
+                    android:textSize="@dimen/default_text_size_body"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_ingredients"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

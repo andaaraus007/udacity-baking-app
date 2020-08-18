@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.RecipeActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:baselineAligned="false">
+
+            <FrameLayout
+                android:id="@+id/ingredients_container"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_instructions_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/text_half_margin"
+                    android:paddingRight="@dimen/text_half_margin"
+                    android:text="@string/instructions_title"
+                    android:textSize="@dimen/default_text_size_header" />
+                <FrameLayout
+                    android:id="@+id/instructions_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>
