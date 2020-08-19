@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import com.udacity.bakingapp.databinding.FragmentVideoBinding;
 import java.util.Objects;
 
 public class VideoFragment extends Fragment {
+    private static final String TAG = "[Debug]" + VideoFragment.class.getSimpleName();
     private static final String KEY_TRACK_SELECTOR_PARAMETERS = "track_selector_parameters";
     private static final String KEY_WINDOW = "window";
     private static final String KEY_POSITION = "position";
@@ -56,6 +58,7 @@ public class VideoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ");
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_video, container, false);
         FragmentVideoBinding fragmentVideoBinding = DataBindingUtil.bind(rootView);
@@ -88,6 +91,7 @@ public class VideoFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+        Log.d(TAG, "onSaveInstanceState: ");
         updateTrackSelectorParameters();
         updateStartPosition();
         outState.putParcelable(KEY_TRACK_SELECTOR_PARAMETERS, mTrackSelectorParameters);
@@ -99,10 +103,15 @@ public class VideoFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart: ");
         if (Util.SDK_INT > 23) {
             initializePlayer();
             if (mPlayerView != null) {
                 mPlayerView.onResume();
+            }
+        } else {
+            if (mPlayer != null) {
+                mPlayer.setPlayWhenReady(true);
             }
         }
     }
@@ -110,7 +119,55 @@ public class VideoFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Log.d(TAG, "onDestroyView: ");
         releasePlayer();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+        if (Util.SDK_INT > 23) {
+            initializePlayer();
+            if (mPlayerView != null) {
+                mPlayerView.onPause();
+            }
+        } else {
+            if (mPlayer != null) {
+                mPlayer.setPlayWhenReady(false);
+            }
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
+        if (Util.SDK_INT <= 23 || mPlayer == null) {
+            initializePlayer();
+            if (mPlayerView != null) {
+                mPlayerView.onResume();
+            }
+        } else {
+            if (mPlayer != null) {
+                mPlayer.setPlayWhenReady(true);
+            }
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: ");
+        if (Util.SDK_INT <= 23 ) {
+            if (mPlayerView != null) {
+                mPlayerView.onPause();
+            }
+        } else {
+            if (mPlayer != null) {
+                mPlayer.setPlayWhenReady(false);
+            }
+        }
     }
 
     public void setVideoUrl(String videoUrl) {
