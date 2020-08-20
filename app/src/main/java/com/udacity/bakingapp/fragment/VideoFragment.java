@@ -109,10 +109,6 @@ public class VideoFragment extends Fragment {
             if (mPlayerView != null) {
                 mPlayerView.onResume();
             }
-        } else {
-            if (mPlayer != null) {
-                mPlayer.setPlayWhenReady(true);
-            }
         }
     }
 
@@ -127,15 +123,11 @@ public class VideoFragment extends Fragment {
     public void onPause() {
         super.onPause();
         Log.d(TAG, "onPause: ");
-        if (Util.SDK_INT > 23) {
-            initializePlayer();
+        if (Util.SDK_INT <= 23) {
             if (mPlayerView != null) {
                 mPlayerView.onPause();
             }
-        } else {
-            if (mPlayer != null) {
-                mPlayer.setPlayWhenReady(false);
-            }
+            releasePlayer();
         }
     }
 
@@ -148,10 +140,6 @@ public class VideoFragment extends Fragment {
             if (mPlayerView != null) {
                 mPlayerView.onResume();
             }
-        } else {
-            if (mPlayer != null) {
-                mPlayer.setPlayWhenReady(true);
-            }
         }
     }
 
@@ -159,14 +147,11 @@ public class VideoFragment extends Fragment {
     public void onStop() {
         super.onStop();
         Log.d(TAG, "onStop: ");
-        if (Util.SDK_INT <= 23 ) {
+        if (Util.SDK_INT > 23 ) {
             if (mPlayerView != null) {
                 mPlayerView.onPause();
             }
-        } else {
-            if (mPlayer != null) {
-                mPlayer.setPlayWhenReady(false);
-            }
+            releasePlayer();
         }
     }
 
@@ -200,7 +185,7 @@ public class VideoFragment extends Fragment {
                         .Factory(dataSourceFactory)
                         .createMediaSource(Uri.parse(mVideoUrl));
                 mPlayer.prepare(mMediaSource);
-                mPlayer.setPlayWhenReady(true);
+                mPlayer.setPlayWhenReady(mStartAutoPlay);
                 boolean haveStartPosition = mStartWindow != C.INDEX_UNSET;
                 if (haveStartPosition) {
                     mPlayer.seekTo(mStartWindow, mStartPosition);
